@@ -1,7 +1,11 @@
 -- How many female customers do we have from the state of Oregon (OR)?
 /*
 * Write your query here
-*/
+*/SELECT count( * )
+FROM customers
+WHERE state = 'OR' AND gender = 'F';
+
+NUMBER OF FEMALE CUSTOMERS IN OREGAN STATE IS EQUAL TO 106
 
 -- Who over the age of 44 has an income of 100 000 or more? (excluding 44)
 /*
