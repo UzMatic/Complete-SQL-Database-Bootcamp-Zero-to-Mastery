@@ -21,15 +21,18 @@ SELECT e.emp_no, COUNT(s.salary) AS "Salary changes"
 FROM employees as e
 INNER JOIN salaries as s USING(emp_no)
 INNER JOIN dept_emp AS d USING(emp_no)
-INNER JOIN departments as de ON de.dept_no = d.dept_no
-WHERE de.dept_name = 'Development'
+WHERE d.dept_no = 'd005'
 GROUP BY e.emp_no
-HAVING COUNT(s.salary) > 15
-
+HAVING COUNT(s.salary) > 15;
 
 
 /*
 *  Show me all the employees that have worked for multiple departments
 *  Database: Employees
 */
+SELECT e.emp_no, COUNT(d.dept_no) AS "No_dept"
+FROM employees as e
+JOIN dept_emp AS d USING(emp_no)
+GROUP BY e.emp_no
+HAVING COUNT(d.dept_no) > 1;
 
