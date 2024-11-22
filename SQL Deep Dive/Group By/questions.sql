@@ -11,12 +11,11 @@ GROUP BY hire_date;
 *   Show me all the employees, hired after 1991 and count the amount of positions they've had
 *  Database: Employees
 */
-
-SELECT e.emp_no, e.first_name,  e.last_name, hire_date
+SELECT e.emp_no, COUNT(t.title) as "Number of titles"
 FROM employees as e
-WHERE EXTRACT(YEAR FROM hire_date) > '1991';
-GROUP BY e.emp_no, e.first_name, e.last_name, hire_date;
-  
+join titles as t USING(emp_no)
+WHERE EXTRACT(YEAR FROM e.hire_date) > '1991'
+GROUP BY e.emp_no;
 
 
 /*
