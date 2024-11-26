@@ -3,9 +3,11 @@
 *  Database: World
 *  Table: Country
 */
-
-SELECT *
-FROM country;
+SELECT DISTINCT(c.continent),
+    SUM(c.population) OVER (
+    PARTITION BY c.continent
+    ) AS "population"
+FROM country as c;
 
 /*
 *  To the previous query add on the ability to calculate the percentage of the world population
@@ -16,9 +18,19 @@ FROM country;
 *  Database: World
 *  Table: Country
 */
-
-SELECT *
-FROM country;
+SELECT 
+    c.continent,
+    SUM(c.population) AS "population",
+    CONCAT(
+        ROUND(
+            (SUM(c.population)::numeric / (SELECT SUM(population)::numeric FROM country)) * 100, 
+            2
+        ), '%'
+    ) AS "world_population_percentage"
+FROM 
+    country AS c
+GROUP BY 
+    c.continent;
 
 
 /*
@@ -28,5 +40,3 @@ FROM country;
 *  Table: Regions (Join + Window function)
 */
 
-SELECT *
-FROM regions AS r;
