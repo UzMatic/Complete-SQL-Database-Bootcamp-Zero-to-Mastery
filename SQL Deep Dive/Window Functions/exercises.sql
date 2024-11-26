@@ -39,4 +39,10 @@ GROUP BY
 *  Database: France
 *  Table: Regions (Join + Window function)
 */
+SELECT DISTINCT(r.id), r.name,
+    COUNT(t.name) OVER (PARTITION BY r.id ORDER BY "r"."name") AS "total_towns"
+FROM regions as r 
+JOIN departments AS d on r.code = d.region
+JOIN towns AS t ON d.code = t.department
+ORDER BY r.name; 
 
