@@ -5,15 +5,11 @@
 * if it's between 10 and 20 you show 'average' 
 * and of is lower than or equal to 10 you show 'cheap'.
 */
-SELECT 
-    p.prod_id, 
-    p.title, 
-    p.price,
-    CASE
-        WHEN p.price > 20 THEN 'expensive'
-        WHEN p.price BETWEEN 10 AND 20 THEN 'average'
-        ELSE 'cheap'
-    END AS price_class
-FROM products AS p
+select p.prod_id, p.title, p.price,
+        CASE
+            WHEN p.price > 20 THEN 'expensive'
+            WHEN p.price between 10 AND 20 then 'average'
+            ELSE 'cheap'
+        END AS "price class"
+FROM productS as p
 ORDER BY p.price DESC;
-
