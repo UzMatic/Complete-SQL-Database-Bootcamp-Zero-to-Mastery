@@ -37,4 +37,4 @@ ORDER BY o.customerid;
 select d.dept_no, d.emp_no , t.title
 from dept_emp as d
 join titles as t using(emp_no)
-WHERE emp_no NOT in ('110183') AND t.title not in ('Manager');
+WHERE emp_no ='110183'
