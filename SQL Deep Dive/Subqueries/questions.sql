@@ -34,7 +34,25 @@ ORDER BY o.customerid;
 * Question: Filter employees who have emp_no 110183 as a manager
 */
 /* with join */
-select d.dept_no, d.emp_no , t.title
-from dept_emp as d
-join titles as t using(emp_no)
-WHERE emp_no ='110183'
+SELECT e.emp_no, e.first_name, e.last_name, t.title
+FROM employees as e 
+join dept_emp as de using(emp_no)
+JOIN titles as t using(emp_no)
+WHERE emp_no = 110183 and title = 'Manager';
+
+/* with subquery */
+SELECT e.emp_no, e.first_name, e.last_name, 
+       (SELECT t.title 
+        FROM titles AS t 
+        WHERE t.emp_no = e.emp_no AND t.title = 'Manager') AS title
+FROM employees AS e
+WHERE e.emp_no = 110183
+  AND EXISTS (
+      SELECT de.emp_no
+      FROM dept_emp AS de
+      WHERE de.emp_no = e.emp_no
+  );
+
+
+
+
